@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Cart from '../components/cart.svelte';
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+        <h1 class="text-3xl bg-red-500 font-bold underline">
+            Astro + Svelte
+          </h1>
+          <Cart client:load />
+	</main>
+</Layout>

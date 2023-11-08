@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Wrapper } from '../components/Wrapper';
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+        <h1 class="text-3xl bg-red-500 font-bold underline">
+            Astro + React
+          </h1>
+		<Wrapper client:load />
+	</main>
+</Layout>

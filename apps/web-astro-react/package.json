@@ -1,0 +1,40 @@
+{
+  "name": "web-astro-react",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.3.1",
+    "@astrojs/partytown": "^2.0.2",
+    "@astrojs/react": "^3.0.4",
+    "@astrojs/tailwind": "^5.0.2",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "@xstate/react": "4.0.0-beta.10",
+    "astro": "^3.4.3",
+    "astro-compress": "^2.2.3",
+    "astro-google-fonts-optimizer": "^0.2.2",
+    "clsx": "^2.0.0",
+    "config": "workspace:*",
+    "machines": "workspace:*",
+    "providers": "workspace:*",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "tailwindcss": "^3.3.5",
+    "types": "workspace:*",
+    "typescript": "^5.2.2",
+    "ui": "workspace:*",
+    "utils": "workspace:*",
+    "web-next": "workspace:^",
+    "xstate": "5.0.0-beta.40"
+  },
+  "devDependencies": {
+    "prettier-plugin-astro": "^0.12.1"
+  }
+}

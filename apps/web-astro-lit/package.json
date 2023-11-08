@@ -1,0 +1,27 @@
+{
+  "name": "web-astro-lit",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.3.1",
+    "@astrojs/lit": "^3.0.2",
+    "@astrojs/partytown": "^2.0.2",
+    "@astrojs/tailwind": "^5.0.2",
+    "@webcomponents/template-shadowroot": "^0.2.1",
+    "astro": "^3.4.3",
+    "astro-compress": "^2.2.3",
+    "clsx": "^2.0.0",
+    "lit": "^2.8.0",
+    "tailwindcss": "^3.0.24",
+    "typescript": "^5.2.2",
+    "xstate": "5.0.0-beta.40",
+    "xstate-lit": "^2.0.1"
+  }
+}
