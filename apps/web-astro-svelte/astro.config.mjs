@@ -1,8 +1,8 @@
-import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
-import partytown from "@astrojs/partytown";
-import svelte from "@astrojs/svelte";
-import compress from "astro-compress";
+import { defineConfig } from 'astro/config'
+import tailwind from '@astrojs/tailwind'
+import partytown from '@astrojs/partytown'
+import svelte from '@astrojs/svelte'
+import compress from 'astro-compress'
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,7 +14,7 @@ export default defineConfig({
       minifyCSS: true,
       minifyJS: true,
       removeComments: true,
-      removeScriptTypeAttributes: true,
-    }),
-  ],
-});
+      removeScriptTypeAttributes: true
+    })
+  ]
+})

@@ -1,79 +1,91 @@
-import { createMachine, fromPromise, raise } from "xstate";
-import { Product } from "types";
+import { createMachine, fromPromise, raise } from 'xstate'
+import type { Product } from 'types'
 
+// const fetcher = fromPromise(
+//   async ({ input }: { input: { userId: string } }) => {
+//     const user = await fetchProduct(input.userId);
+
+//     return user;
+//   }
+// );
 export const productMachine = createMachine(
   {
-    id: "product",
+    id: 'product',
     types: {} as {
-      context: Product;
+      //   actors: {
+      //     src: "fetchData"; // src name (inline behaviors ideally inferred)
+      //     id: "fetch1" | "fetch2"; // possible ids (optional)
+      //     logic: typeof fetcher;
+      //   };
+      context: Product
       events:
-        | { type: "refresh"; id: string }
-        | { type: "updateProduct"; product: Product };
-      actions: {
-        sendProductToParent: () => void;
-      };
+        | { type: 'refresh'; id: string }
+        | { type: 'updateProduct'; product: Product }
+      //   actions: {
+      //     sendProductToParent: () => void;
+      //   };
     },
     context: {
-      id: "",
+      id: ''
     },
-    initial: "fetchingProductInformation",
+    initial: 'fetchingProductInformation',
     states: {
       fetchingProductInformation: {
         invoke: {
-          src: fromPromise(async () => true),
+          src: 'fetchData', // strongly typed
+          id: 'fetch2', // strongly typed
           onDone: {
-            actions: ["sendProductToParent"],
-            target: "updated",
+            actions: ({ event }) => {
+              event.output // strongly typed as { result: string }
+            }
           },
-          onError: {
-            target: "error",
-          },
-        },
+          input: { userId: '42' } // strongly typed
+        }
       },
       updated: {
         after: {
           5000: {
-            target: "healthy",
-          },
+            target: 'healthy'
+          }
         },
         on: {
           refresh: {
-            target: "fetchingProductInformation",
-          },
-        },
+            target: 'fetchingProductInformation'
+          }
+        }
       },
       healthy: {
         after: {
           60000: {
-            target: "stale",
-          },
+            target: 'stale'
+          }
         },
         on: {
           refresh: {
-            target: "fetchingProductInformation",
-          },
-        },
+            target: 'fetchingProductInformation'
+          }
+        }
       },
       stale: {
         on: {
           refresh: {
-            target: "fetchingProductInformation",
-          },
-        },
+            target: 'fetchingProductInformation'
+          }
+        }
       },
       error: {
         on: {
           refresh: {
-            target: "fetchingProductInformation",
-          },
-        },
-      },
-    },
+            target: 'fetchingProductInformation'
+          }
+        }
+      }
+    }
   },
   {
-    actions: {
-      sendProductToParent: ({ context }) =>
-        raise({ type: "updateProduct", product: context }),
-    },
+    // actions: {
+    //   sendProductToParent: ({ context }) =>
+    //     raise({ type: "updateProduct", product: context }),
+    // },
   }
-);
+)

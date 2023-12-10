@@ -1,10 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { Test } from '../components/test';
+import Layout from '../layouts/Layout.astro'
+import { AppCart } from '../components/app-cart'
 ---
 
-<Layout title="Welcome to Astro.">
-	<main>
-		<Test client:load />
-	</main>
+<Layout title='Welcome to Astro.'>
+  <main>
+    <h1 class='bg-red-500 text-3xl font-bold underline'>Astro + Lit</h1>
+    <AppCart client:only />
+  </main>
 </Layout>

@@ -1,7 +1,7 @@
-import { icons } from "./icons/icons";
+import { icons } from './icons/icons'
 
 export const themes = {
   default: {
-    icons,
-  },
-};
+    icons
+  }
+}

@@ -1,58 +1,58 @@
-import { useContext } from "react";
-import { GlobalStateContext } from "providers";
-import { Badge, Button } from "ui";
-import { icon, t } from "utils";
+import { useContext } from 'react'
+import { GlobalStateContext } from '../../../../packages/providers-react/src'
+import { Badge, Button } from 'ui-react'
+import { icon, t } from 'utils'
 
 export const Test = () => {
   const { cartCount, cartItems, addToCart, clearCart, deleteFromCart } =
-    useContext(GlobalStateContext);
+    useContext(GlobalStateContext)
 
   return (
     <div>
-      <button className="relative text-5xl" type="button">
-        <span dangerouslySetInnerHTML={{ __html: icon("cart") }} />
+      <button className='relative text-5xl' type='button'>
+        <span dangerouslySetInnerHTML={{ __html: icon('cart') }} />
         <Badge count={cartCount} />
       </button>
       {cartCount > 0 && (
         <ul>
           {cartItems.map((cartItem) => (
-            <li key={cartItem.id} className="flex gap-x-2">
+            <li key={cartItem.id} className='flex gap-x-2'>
               <div>
                 <strong>{cartItem.title}</strong>
               </div>
               <div>
-                <small>{cartItem.inStock ? "In stock" : "Out of stock"}</small>
+                <small>{cartItem.inStock ? 'In stock' : 'Out of stock'}</small>
               </div>
               <div>€{cartItem.price}</div>
               <input
-                className="border inline-flex w-auto"
-                type="number"
+                className='inline-flex w-auto border'
+                type='number'
                 value={cartItem.quantity}
               />
             </li>
           ))}
         </ul>
       )}
-      <div className="flex gap-x-2">
+      <div className='flex gap-x-2'>
         <Button
           onClick={() => {
-            addToCart("test2");
+            addToCart('test2')
           }}
-          text={t("cart.addToCart")}
+          text={t('cart.addToCart')}
         />
         <Button
           onClick={() => {
-            deleteFromCart("test2");
+            deleteFromCart('test2')
           }}
-          text={t("cart.removeFromCart")}
+          text={t('cart.removeFromCart')}
         />
         <Button
           onClick={() => {
-            clearCart();
+            clearCart()
           }}
-          text={t("cart.clearCart")}
+          text={t('cart.clearCart')}
         />
       </div>
     </div>
-  );
-};
+  )
+}

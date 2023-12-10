@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "types": "workspace:*",
-    "xstate": "5.0.0-beta.40"
+    "xstate": "^5.0.0"
   },
   "devDependencies": {
     "typescript": "^5.2.2"

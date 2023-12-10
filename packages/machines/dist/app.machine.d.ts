@@ -1,10 +1,18 @@
-import { CartProduct, Product } from "types";
+import type { CartProduct, Product } from "types";
 export declare const appMachine: import("xstate").StateMachine<{
     cartCount: number;
     cartItems: CartProduct[];
+    userEmail?: string | undefined;
+    userName?: string | undefined;
     products: Product[];
     useDarkTheme?: boolean | undefined;
 }, {
+    type: "auth.logIn";
+    id: string;
+} | {
+    type: "auth.logOut";
+    id: string;
+} | {
     type: "cart.clear";
 } | {
     type: "cart.add";
@@ -13,6 +21,12 @@ export declare const appMachine: import("xstate").StateMachine<{
     type: "cart.delete";
     id: string;
 }, import("xstate").ProvidedActor, import("xstate").ParameterizedObject, import("xstate").ParameterizedObject, string, string, unknown, import("xstate").NonReducibleUnknown, import("xstate").ResolveTypegenMeta<import("xstate").TypegenDisabled, {
+    type: "auth.logIn";
+    id: string;
+} | {
+    type: "auth.logOut";
+    id: string;
+} | {
     type: "cart.clear";
 } | {
     type: "cart.add";

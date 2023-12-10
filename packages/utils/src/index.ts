@@ -1,2 +1,2 @@
-export { icon } from "./icon/icon";
-export { t } from "./t/t";
+export { icon } from './icon/icon'
+export { t } from './t/t'

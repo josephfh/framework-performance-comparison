@@ -2,13 +2,13 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev --concurrency 15",
+    "dev": "turbo run dev --concurrency 20",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{astro,cjs,svelte,ts,tsx,md,mjs,vue}\""
   },
   "devDependencies": {
-    "eslint": "^8.48.0",
-    "prettier": "^3.0.3",
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.1",
     "tsconfig": "workspace:*",
     "turbo": "latest"
   },

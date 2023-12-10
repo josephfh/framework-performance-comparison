@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import { GlobalStateProvider } from "providers";
-import Inner from "./inner";
+import { GlobalStateProvider } from '../../../packages/providers-react/src'
+import Inner from './inner'
 
 export default function Cart(): JSX.Element {
   return (
@@ -10,5 +10,5 @@ export default function Cart(): JSX.Element {
         <Inner />
       </GlobalStateProvider>
     </main>
-  );
+  )
 }

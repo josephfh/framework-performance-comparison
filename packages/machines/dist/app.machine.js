@@ -19,62 +19,104 @@ exports.appMachine = (0, xstate_1.createMachine)({
         cartItems: [],
         products: [],
     },
-    initial: "idle",
+    type: "parallel",
     states: {
-        idle: {
-            on: {
-                "cart.clear": {
-                    actions: [
-                        (0, xstate_1.assign)({
-                            cartItems: [],
-                        }),
-                    ],
-                    target: "recalculate",
-                },
-                "cart.add": {
-                    actions: [
-                        (0, xstate_1.assign)({
-                            cartItems: function (_a) {
-                                var context = _a.context, event = _a.event;
-                                return __spreadArray(__spreadArray([], context.cartItems.filter(function (item) { return item.id !== event.id; }), true), [
-                                    {
-                                        id: event.id,
-                                        quantity: 0,
-                                        title: "Nice product",
-                                        inStock: true,
-                                        price: 150,
-                                    },
-                                ], false);
-                            },
-                        }),
-                    ],
-                    target: "recalculate",
-                },
-                "cart.delete": {
-                    actions: [
-                        (0, xstate_1.assign)({
-                            cartItems: function (_a) {
-                                var context = _a.context, event = _a.event;
-                                return context.cartItems.filter(function (item) { return item.id !== event.id; });
-                            },
-                        }),
-                    ],
-                    target: "recalculate",
-                },
-            },
-        },
-        recalculate: {
-            entry: [
-                (0, xstate_1.assign)({
-                    cartCount: function (_a) {
-                        var context = _a.context;
-                        return context.cartItems.length;
+        authentication: {
+            initial: "unauthenticated",
+            states: {
+                unauthenticated: {
+                    on: {
+                        "auth.logIn": {
+                            target: "loggingIn",
+                        },
                     },
-                }),
-            ],
-            always: {
-                target: "idle",
+                },
+                loggingIn: {
+                    always: {
+                        target: "authenticated",
+                    },
+                },
+                authenticated: {
+                    on: {
+                        "auth.logOut": {
+                            target: "loggingOut",
+                        },
+                    },
+                },
+                loggingOut: {
+                    after: {
+                        200: {
+                            target: "loggedOutConfirmation",
+                        },
+                    },
+                },
+                loggedOutConfirmation: {
+                    after: {
+                        200: {
+                            target: "unauthenticated",
+                        },
+                    },
+                },
+                requestingPasswordReset: {},
+                error: {},
             },
         },
+        shopping: {
+            initial: "browsing",
+            states: {
+                browsing: {
+                    on: {
+                        "cart.clear": {
+                            actions: ["clearCart", "recalculateCart"],
+                        },
+                        "cart.add": {
+                            actions: ["addToCart", "recalculateCart"],
+                        },
+                        "cart.delete": {
+                            actions: ["deleteFromCart", "recalculateCart"],
+                        },
+                    },
+                },
+                checkingOut: {},
+                paying: {},
+                thankYouForBuying: {},
+                error: {},
+            },
+        },
+    },
+}, {
+    actions: {
+        addToCart: (0, xstate_1.assign)({
+            cartItems: function (_a) {
+                var context = _a.context, event = _a.event;
+                return event.type === "cart.add"
+                    ? __spreadArray(__spreadArray([], context.cartItems.filter(function (item) { return item.id !== event.id; }), true), [
+                        {
+                            id: event.id,
+                            quantity: 0,
+                            title: "Nice product",
+                            inStock: true,
+                            price: 150,
+                        },
+                    ], false) : [];
+            },
+        }),
+        clearCart: (0, xstate_1.assign)({
+            cartItems: [],
+        }),
+        deleteFromCart: (0, xstate_1.assign)({
+            cartItems: function (_a) {
+                var context = _a.context, event = _a.event;
+                return event.type === "cart.delete"
+                    ? context.cartItems.filter(function (item) { return item.id !== event.id; })
+                    : context.cartItems;
+            },
+        }),
+        recalculateCart: (0, xstate_1.assign)({
+            cartCount: function (_a) {
+                var context = _a.context;
+                return context.cartItems.length;
+            },
+        }),
     },
 });
